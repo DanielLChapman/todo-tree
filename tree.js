@@ -67,9 +67,10 @@ Tree.prototype.traverseLine = function(callback) {
 		else {
 			code += "<li style='color: red;'>";
 		}
+		code += "<i class='fa fa-check checkmark' parent='"+currentNode.parent.id+"' id='"+currentNode.id+"' task='"+currentNode.task+"'style='cursor: pointer;' aria-hidden='true'></i>"
 		code += currentNode.task;
 		queue.push(currentNode);
-		code += "</span>   <i class='fa fa-check checkmark' parent='"+currentNode.parent.id+"' id='"+currentNode.id+"' task='"+currentNode.task+"'style='cursor: pointer;' aria-hidden='true'></i><span class='hidden'>&nbsp;   <input type='text' name='fname' class='new-task-field-"+currentNode.id+"'>     <button type='button' class='node-button'>Add Task</button>";
+		code += "</span>   <span class='hidden'>&nbsp;   <input type='text' name='fname' class='new-task-field-"+currentNode.id+"'>     <button type='button' class='node-button'>Add Task</button>";
 		if (currentNode.boolRemoved) {
 			code+="     <i class='fa fa-times removal' aria-hidden='true' style='color: red !important'></i>";
 		}
@@ -189,7 +190,7 @@ $('body').on('click','.node-button', function() {
 	render();
 });
 $('body').on('click','.removal', function() {
-	tree.remove(parseInt($(this).parent().children('i').attr('id')), parseInt($(this).parent().children('i').attr('parent')), tree.traverseBF);
+	tree.remove(parseInt($(this).parent().children('i').attr('id')), parseInt($(this).parent().parent().children('i').attr('parent')), tree.traverseBF);
 	render();
 });
 $('body').on('click', 'li', function() {
@@ -197,13 +198,7 @@ $('body').on('click', 'li', function() {
 	$(this).children('.hidden').show();
 });
 $(document).ready(function() {
-	tree.add('Two', 1, tree.traverseBF);
-	tree.add('Three', 1, tree.traverseBF);
-	
-	tree.traverseDF(function(node) {
-	});
-	tree.traverseBF(function(node) {
-	});
+
 	render();
 	/*console.log("Contains");
 	tree.contains(function(node) {
