@@ -72,7 +72,7 @@ Tree.prototype.traverseLine = function(callback) {
 		queue.push(currentNode);
 		code += "</span>   <span class='hidden'>&nbsp;   <input type='text' name='fname' class='new-task-field-"+currentNode.id+"'>     <button type='button' class='node-button'>Add Task</button>";
 		if (currentNode.boolRemoved) {
-			code+="     <i class='fa fa-times removal' aria-hidden='true' style='color: red !important'></i>";
+			code+="     <i class='fa fa-times removal' aria-hidden='true' style='color: red !important; cursor: pointer;'></i>";
 		}
 		code+="</span></li>";
 		callback(currentNode);
@@ -190,7 +190,7 @@ $('body').on('click','.node-button', function() {
 	render();
 });
 $('body').on('click','.removal', function() {
-	tree.remove(parseInt($(this).parent().children('i').attr('id')), parseInt($(this).parent().parent().children('i').attr('parent')), tree.traverseBF);
+	tree.remove(parseInt($(this).parent().parent().children('i').attr('id')), parseInt($(this).parent().parent().children('i').attr('parent')), tree.traverseBF);
 	render();
 });
 $('body').on('click', 'li', function() {
