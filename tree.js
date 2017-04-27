@@ -1,7 +1,7 @@
 var counter = 0;
 var code = "";
 var tree = new Tree("To-Do:");
-//every node contains a task, id (need a better unique system), parent, and children
+//every node contains a task, id (need a better unique system), parent, and children. Boolean for completed tasks or if the bool can be removed (root)
 function Node(task) {
 	this.task = task;
 	counter++;
@@ -11,23 +11,13 @@ function Node(task) {
 	this.complete = false;
 	this.boolRemoved = true;
 }
-function findIndex(arr, data) {
-    var index;
- 
-    for (var i = 0; i < arr.length; i++) {
-        if (arr[i].id === data) {
-            index = i;
-        }
-    }
- 
-    return index;
-}
+//Tree data,setting up root and nodes
 function Tree(data) {
 	var node = new Node(data);
 	this._root = node;
 	this._root.boolRemoved = false;
 }
-
+//Depth-first search
 Tree.prototype.traverseDF = function(callback) {
 
 	(function recurse(currentNode) {
@@ -39,23 +29,21 @@ Tree.prototype.traverseDF = function(callback) {
 		
 	})(this._root)
 }
+//breadth-first search with an array instead of a queue
 Tree.prototype.traverseBF = function(callback) {
-
 	var queue = [];
-	
 	queue.push(this._root);
-	
 	currentNode = queue.shift();
 	while (currentNode) {
 		for (var i = 0; i < currentNode.children.length; i++) {
 			queue.push(currentNode.children[i]);
-		}
-		
+		}	
 		callback(currentNode);
 		currentNode = queue.shift();
 	}
-	
 }
+//Traverses the tree line by line. So Root ->first node -> first child -> and children and repeat, then moves onto the next child. Moves up, next child. So on and so on.
+//Also generates the display code which holds information about the tree
 Tree.prototype.traverseLine = function(callback) {
 	var queue = [];
 	code += "<ul>";
@@ -84,7 +72,7 @@ Tree.prototype.traverseLine = function(callback) {
 	})(currentNode)
 	code += "</ul>";
 }
-
+//If a higher task is marked complete, recursive search their children and their children and mark those complete as well
 Tree.prototype.completeChildren = function(node) {
 	(function recurse(currentNode) {
 		currentNode.complete = true;
@@ -92,7 +80,8 @@ Tree.prototype.completeChildren = function(node) {
 			recurse(currentNode.children[i]);
 		}
 	})(node);
-}
+};
+//If the parents are complete but a new task is added, then the parents are no longer complete. This searches upwards.
 Tree.prototype.checkParents = function(node) {
 	(function recurse(currentNode) {
 		if (!currentNode.complete) {
@@ -104,11 +93,11 @@ Tree.prototype.checkParents = function(node) {
 		}
 	})(node)
 }
-
+//Calls traversal searches with callback instead of only going with one traversal. 
 Tree.prototype.contains = function(callback, traversal) {
     traversal.call(this, callback);
 };
-
+//Adding a node. Traverse through the information with the callback that compares id. When we have a parent whose id is the target, we push them a child.
 Tree.prototype.add = function(data, toData, traversal) {
 	var child = new Node(data),
 		parent = null,
@@ -128,6 +117,7 @@ Tree.prototype.add = function(data, toData, traversal) {
 		throw new Error('Cannot add node to a non-existent parent.');
 	}
 };
+//Similar to add, search through the tree for the parent id, and remove the selected child from it. 
 Tree.prototype.remove = function(data, fromData, traversal) {
     var tree = this,
         parent = null,
@@ -159,6 +149,7 @@ Tree.prototype.remove = function(data, fromData, traversal) {
 	}
     return childToRemove;
 };
+//Marks a node complete then calls for their children to also be complete
 Tree.prototype.complete = function(data, traversal) {
 	var tree = this,
 		parent = null, 
@@ -178,48 +169,3 @@ Tree.prototype.complete = function(data, traversal) {
 		throw new Error('Parent does not exist.');
 	}
 }
-var render = function() {
-	code = "";
-	tree.traverseLine(function(node) {
-	});
-	$('.tree-box').html(code);
-}
-var newTask = function(data) {
-	tree.add(data, tree._root.id, tree.traverseBF);
-	render();
-}
-$('body').on('click', '.checkmark', function() {
-	tree.complete($(this).attr('id'), tree.traverseBF);
-	render();
-});
-$('body').on('click','.node-button', function() {
-	var data = $(this).parent().children('input').val();
-	var parentID = $(this).parent().parent().children('i').attr('id');
-	tree.add(data, parseInt(parentID), tree.traverseBF);
-	render();
-});
-$('body').on('click','.removal', function() {
-	tree.remove(parseInt($(this).parent().parent().children('i').attr('id')), parseInt($(this).parent().parent().children('i').attr('parent')), tree.traverseBF);
-	render();
-});
-$('body').on('click', 'li', function() {
-	$('.hidden').hide();
-	$(this).children('.hidden').show();
-});
-$(document).ready(function() {
-
-	render();
-	/*console.log("Contains");
-	tree.contains(function(node) {
-		var tempArr = node.task.split('-');
-		for (var x = 0; x < tempArr.length; x++) {
-			if (tempArr[x].toLowerCase() === 'one' ) {
-				console.log(node);
-			}
-		}
-	}, tree.traverseBF);
-	tree.remove('Three', 'One', tree.traverseBF);
-	tree.traverseDF(function(node) {
-		console.log(node.task  + " " + node.id);
-	});*/
-});
