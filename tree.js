@@ -93,7 +93,17 @@ Tree.prototype.completeChildren = function(node) {
 		}
 	})(node);
 }
-
+Tree.prototype.checkParents = function(node) {
+	(function recurse(currentNode) {
+		if (!currentNode.complete) {
+			parent = currentNode.parent;
+			if (parent != 0 && parent.complete) {
+				parent.complete = false;
+				recurse(parent);
+			}
+		}
+	})(node)
+}
 
 Tree.prototype.contains = function(callback, traversal) {
     traversal.call(this, callback);
@@ -112,9 +122,8 @@ Tree.prototype.add = function(data, toData, traversal) {
 	
 	if (parent) {
 		parent.children.push(child);
-		parent.complete = false;
-		tree._root.complete = false;
 		child.parent = parent;
+		tree.checkParents(child);
 	} else {
 		throw new Error('Cannot add node to a non-existent parent.');
 	}
