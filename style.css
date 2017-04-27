@@ -1,0 +1,71 @@
+.tree-box {
+	width: 600px;
+	margin: 0 auto;
+	overflow-x: scroll;
+}
+ul {
+	list-style: none;
+	position: relative;
+	left: -25px;
+}
+li {
+	padding: 20px;
+	padding-left: 10;
+	font-family: 'Open Sans', sans-serif;
+	width: 500px;
+	border:1px solid black;
+	position: relative;
+	font-size: 13px;
+}
+.hidden {	
+	display: none;
+}
+h2 {
+	text-align: center;
+	font-size: 32px;
+	color: darkorange;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+h3 {
+	font-family: 'Open Sans', sans-serif;
+}
+.input-field {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.input-field input {
+	width: 400px;
+	height: 30px;
+	font-family: 'Open Sans', sans-serif;
+	border-radius: 5px;
+	border:1px solid black;
+}
+.input-field button {
+	width: 150px;
+	height: 34px;
+	border:1px solid black;
+	background: white;
+	position: relative;	
+	left: 30px;	
+	border-radius: 5px;
+}
+.tree-box::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);	
+	background-color: #F5F5F5;
+	height: 1px;
+}
+.tree-box::-webkit-scrollbar
+{
+	width: 10px;	
+	height: 2px;
+	background-color: #F5F5F5;
+}
+.tree-box::-webkit-scrollbar-thumb
+{
+	background-color: #000000;	
+	border: 2px solid #555555;
+	height: 2px;
+}
