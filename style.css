@@ -2,6 +2,7 @@
 	width: 600px;
 	margin: 0 auto;
 	overflow-x: scroll;
+	height: auto;
 }
 ul {
 	list-style: none;

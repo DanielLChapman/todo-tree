@@ -1,4 +1,4 @@
-var counter = 0;
+/*var counter = 0;
 var code = "";
 var tree = new Tree("To-Do:");
 //every node contains a task, id (need a better unique system), parent, and children. Boolean for completed tasks or if the bool can be removed (root)
@@ -169,3 +169,4 @@ Tree.prototype.complete = function(data, traversal) {
 		throw new Error('Parent does not exist.');
 	}
 }
+*/

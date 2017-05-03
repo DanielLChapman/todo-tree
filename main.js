@@ -1,5 +1,5 @@
 //returns the index of the data in the arr (child in the parents children)
-function findIndex(arr, data) {
+/*function findIndex(arr, data) {
     var index;
  
     for (var i = 0; i < arr.length; i++) {
@@ -21,8 +21,8 @@ var render = function() {
 var newTask = function(data) {
 	tree.add(data, tree._root.id, tree.traverseBF);
 	render();
-}
+}*/
 //sets up the display with the one task
 $(document).ready(function() {
-	render();
+	
 });

@@ -1,3 +1,4 @@
+/*
 //Mark complete
 $('body').on('click', '.checkmark', function() {
 	tree.complete($(this).attr('id'), tree.traverseBF);
@@ -21,4 +22,4 @@ $('body').on('click','.removal', function() {
 $('body').on('click', 'li', function() {
 	$('.hidden').hide();
 	$(this).children('.hidden').show();
-});
+});*/
