@@ -7,36 +7,42 @@
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro:300" rel="stylesheet">
 	</head>
 	<body ng-app="todoTree" ng-controller="MainCtrl">
-		<header>
-			<h2>todos </h2>
-		</header>
-		<h3 class="input-field"><input ng-model="newtask" type="text" name="fname" class="new-task-field"> <button type="button" ng-click="addTaskTo(1, newtask);">Add Task</button> </h3>
-		
-		
-		<section class="tree-box">
-			<script type="text/ng-template"  id="tree_item_renderer.html">
-				<ul>
-					<li ng-class="{'color-black': data.complete === false, 'color-green': data.complete === true}"><i class='fa fa-check checkmark' style='cursor: pointer;' aria-hidden='true' ng-click="complete(data.id);"></i> {{data.task}} <span class="hidden"><i class='fa fa-times removal' aria-hidden='true' style='color: red !important; cursor: pointer;' ng-click="removeFrom(data.id, data.parent.id)"></i> <input type="text" name="newTask" ng-model="data.newTask"
-       ng-minlength="1"> <button ng-click="addTaskTo(data.id, data.newTask)">submit</button></span></li>
-					<ul ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'">
-					</ul>
-				</ul>
-			</script>
 			
-			<ul>
-				<li>{{tree._root.task}}</li>
-				<ul ng-repeat="data in tree._root.children" ng-include="'tree_item_renderer.html'">
-
-				</ul>
-			</ul>
-
-		</section>
+		<ui-view></ui-view>
+		
 		<script src="jquery-3.1.1.min.js"></script>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.js"></script>
 		<script src="app.js"></script>
+	
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="text/ng-template"  id="tree_item_renderer.html">
+					<ul>
+						<li ng-class="{'color-black': data.complete === false, 'color-green': data.complete === true}"><i class='fa fa-check checkmark' style='cursor: pointer;' aria-hidden='true' ng-click="complete(data.id);"></i> {{data.task}} <span class="hidden"><i class='fa fa-times removal' aria-hidden='true' style='color: red !important; cursor: pointer;' ng-click="removeFrom(data.id, data.parent.id)"></i> <input type="text" name="newTask" ng-model="data.newTask"
+		   ng-minlength="1"> <button ng-click="addTaskTo(data.id, data.newTask)">submit</button></span></li>
+						<ul ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'">
+						</ul>
+					</ul>
+				</script>
+		
+		<script type="text/ng-template" id="/home.html">
+			<header>
+				<h2>todos </h2>
+			</header>
+			<h3 class="input-field"><input ng-model="newtask" type="text" name="fname" class="new-task-field"> <button type="button" ng-click="addTaskTo(1, newtask);">Add Task</button> </h3>
+
+			<section class="tree-box">
+
+				<ul>
+					<li>{{tree._root.task}}</li>
+					<ul ng-repeat="data in tree._root.children" ng-include="'tree_item_renderer.html'">
+
+					</ul>
+				</ul>
+
+			</section>
+		</script>
 		<style>
 			.color-black {
 				color: black;
