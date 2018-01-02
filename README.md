@@ -2,6 +2,6 @@ Just a simple todo that allows for tasks to have children using a simple tree mo
 
 TODO (heh) :
 
-3. Possibly add node support with secure random storage so the task can be saved for later. 
+3. Possibly add node + mongodb support with a secure, randomly generated ID for storage so the tasks can be saved for later. 
 
 View it in action here: https://daniellchapman.github.io/todo-tree/
