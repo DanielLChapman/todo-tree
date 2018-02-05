@@ -4,6 +4,13 @@
 	overflow-x: scroll;
 	height: auto;
 }
+@media screen and (max-width: 650px) {
+	.tree-box {
+		width: 95%;
+		position: relative;
+		left: 2.5%;
+	}
+}
 ul {
 	list-style: none;
 	position: relative;
@@ -69,4 +76,24 @@ h3 {
 	background-color: #000000;	
 	border: 2px solid #555555;
 	height: 2px;
+}
+
+@media screen and (max-width: 650px) {
+	.tree-box, .input-field {
+		width: 95%;
+		position: relative;
+		left: 0;
+	}
+	.input-field input {
+		width: 70%;
+		float: left;
+	}
+	.input-field button {
+		float: left;
+		width: 25%;
+		left: initial;
+	}
+	li {
+		width: 400px;
+	}
 }
