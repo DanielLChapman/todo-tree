@@ -160,6 +160,10 @@
 
 			this.contains(callback, this.traverseBF);
 
+			if (parent && parent.complete) {
+				return parent.complete = false;
+			}
+
 			if (parent) {
 				index = findIndex(parent.children, data);
 				this.completeChildren(parent);
@@ -167,6 +171,7 @@
 				throw new Error('Parent does not exist.');
 			}
 		}
+
 		
 		Tree.prototype.remove = function(data, fromData) {
 			var tree = this,
@@ -214,6 +219,7 @@
 		$scope.complete = function(id) {
 			$scope.tree.complete(id);
 		}
+
 		$scope.removeFrom = function(id, parentId) {
 			$scope.tree.remove(id, parentId);
 		}
