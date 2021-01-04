@@ -111,3 +111,7 @@ h3 {
 .move-up-down i {
 	cursor: pointer;
 }
+
+.hide-children ~ ul {
+	display: none;
+}

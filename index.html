@@ -19,7 +19,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/ng-template"  id="tree_item_renderer.html">
 					<ul>
-						<li ng-class="{'color-black': data.complete === false, 'color-green': data.complete === true}" class="input-task">
+						<li ng-class="{'color-black': data.complete === false, 'color-green': data.complete === true, 'hide-children': data.hide === true}" class="input-task">
 							<i class='fa fa-check checkmark' style='cursor: pointer;' aria-hidden='true' ng-click="complete(data.id);"></i> 
 							{{data.task}} 
 							<span class="hidden">
@@ -31,15 +31,10 @@
 								<i class="fa fa-arrow-left" aria-hidden='true' ng-click="moveUpLevel(data.id)"></i>
 								<i class="fa fa-arrow-up" aria-hidden='true' ng-click="moveUp(data.id)"></i>
 								<i class="fa fa-arrow-down" aria-hidden='true' ng-click="moveDown(data.id)"></i>
+								<i class="fa" ng-class="{'fa-eye-slash': data.hide === false, 'fa-eye': data.hide === true}" ng-click="reveal(data.id)"> </i>
 								
 
 							</section>
-							<!-- 
-								
-								Move Up
-								Move Down
-							
-							-->
 						</li>
 						<ul ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'">
 						</ul>

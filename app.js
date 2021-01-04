@@ -28,6 +28,7 @@
 			this.complete = false;
 			this.newTask = ""
 			this.boolRemoved = true;
+			this.hide = false;
 		}
 		var Tree = function(data) {
 			var nodeM = new Node(data);
@@ -281,6 +282,19 @@
 			}
 		}
 
+		Tree.prototype.reveal= function(data) {
+			var tree = this,
+				currentNode = null,
+				callback = function(node) {
+					if (node.id == data) {
+						currentNode = node;
+					}
+				};
+				this.contains(callback, this.traverseBF);
+
+				currentNode.hide = !currentNode.hide;
+		}
+
 		Tree.prototype.moveDown = function(data) {
 			var tree = this,
 				currentNode = null,
@@ -352,6 +366,9 @@
 
 		$scope.moveUpLevel = function(id) {
 			$scope.tree.moveUpLevel(id);
+		}
+		$scope.reveal = function(id) {
+			$scope.tree.reveal(id);
 		}
 		
 		$('body').on('click', 'li', function() {
