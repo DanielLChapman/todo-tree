@@ -1,8 +1,13 @@
 .tree-box {
 	width: 600px;
 	margin: 0 auto;
-	overflow-x: scroll;
+	overflow-x: auto;
+	overflow-y: auto;
 	height: auto;
+	resize: both;
+	border:1px solid black;
+	padding-bottom: 5px;
+	margin-top: 5px;
 }
 @media screen and (max-width: 650px) {
 	.tree-box {
