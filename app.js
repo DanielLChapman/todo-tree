@@ -234,3 +234,10 @@
 		});
 	}]);
 })()
+
+
+$('body').click(function(event) {
+	if (!event.target.classList.contains('input-task')) {
+		$('.hidden').hide();
+	}
+})
