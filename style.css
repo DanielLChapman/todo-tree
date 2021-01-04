@@ -1,5 +1,5 @@
 .tree-box {
-	width: 600px;
+	width: 700px;
 	margin: 0 auto;
 	overflow-x: auto;
 	overflow-y: auto;
@@ -101,4 +101,13 @@ h3 {
 	li {
 		width: 400px;
 	}
+}
+
+
+.move-up-down {
+	float: right;
+	
+}
+.move-up-down i {
+	cursor: pointer;
 }

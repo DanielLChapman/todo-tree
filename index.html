@@ -19,8 +19,27 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script type="text/ng-template"  id="tree_item_renderer.html">
 					<ul>
-						<li ng-class="{'color-black': data.complete === false, 'color-green': data.complete === true}" class="input-task"><i class='fa fa-check checkmark' style='cursor: pointer;' aria-hidden='true' ng-click="complete(data.id);"></i> {{data.task}} <span class="hidden"><i class='fa fa-times removal' aria-hidden='true' style='color: red !important; cursor: pointer;' ng-click="removeFrom(data.id, data.parent.id)"></i> <input class="input-task" type="text" name="newTask" ng-model="data.newTask"
-		   ng-minlength="1"> <button class="input-task" ng-click="addTaskTo(data.id, data.newTask)">submit</button></span></li>
+						<li ng-class="{'color-black': data.complete === false, 'color-green': data.complete === true}" class="input-task">
+							<i class='fa fa-check checkmark' style='cursor: pointer;' aria-hidden='true' ng-click="complete(data.id);"></i> 
+							{{data.task}} 
+							<span class="hidden">
+								<i class='fa fa-times removal' aria-hidden='true' style='color: red !important; cursor: pointer;' ng-click="removeFrom(data.id, data.parent.id)"></i> 
+								<input class="input-task" type="text" name="newTask" ng-model="data.newTask" ng-minlength="1"> 
+								<button class="input-task" ng-click="addTaskTo(data.id, data.newTask)">submit</button>
+							</span>
+							<section class="move-up-down">
+
+								<i class="fa fa-arrow-up" aria-hidden='true' ng-click="moveUp(data.id)"></i>
+								<i class="fa fa-arrow-down" aria-hidden='true' ng-click="moveDown(data.id)"></i>
+
+							</section>
+							<!-- 
+								
+								Move Up
+								Move Down
+							
+							-->
+						</li>
 						<ul ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'">
 						</ul>
 					</ul>
@@ -30,7 +49,7 @@
 			<header>
 				<h2>todos </h2>
 			</header>
-			<h3 class="input-field"><input ng-model="newtask" type="text" name="fname" class="new-task-field"> <button type="button" ng-click="addTaskTo(1, newtask);">Add Task</button> </h3>
+			<h3 class="input-field"><input ng-model="newtask" type="text" name="fname" class="new-task-field"> <button type="button" ng-click="addTaskTo(1, newtask);" class="header-button active-submit">Add Task</button> </h3>
 
 			<section class="tree-box">
 

@@ -95,6 +95,12 @@
 
 			this.contains(callback, traversal);
 
+			if (typeof child.task === "undefined" || child.task === '') {
+				//throw new Error('Cant be empty');
+				//uglifys console
+				return ;
+			}
+
 			if (parent) {
 				parent.children.push(child);
 				child.parent = parent;
@@ -205,6 +211,81 @@
 			}
 			return childToRemove;
 		};
+
+		Tree.prototype.moveUp = function(data) {
+			var tree = this,
+				currentNode = null,
+				parent = null,
+				callback = function(node) {
+					if (node.id == data) {
+						if (node.parent) {
+							currentNode = node;
+							parent = node.parent;
+						} else {
+							throw new Error('cant move root');
+						}
+						
+					}
+				};
+
+			this.contains(callback, this.traverseBF);
+
+			let children = parent.children;
+
+			if (children.length <= 1) {
+				return null;
+			}
+			else if (children[0] === currentNode) {
+				return null;
+			}
+
+			for (var x = 0; x < children.length; x++) {
+				if (children[x] === currentNode) {
+					let tempNode = children[x-1];
+					children[x-1] = children[x];
+					children[x] = tempNode;
+				}
+			}
+		}
+
+		Tree.prototype.moveDown = function(data) {
+			var tree = this,
+				currentNode = null,
+				parent = null,
+				callback = function(node) {
+					if (node.id == data) {
+						if (node.parent) {
+							currentNode = node;
+							parent = node.parent;
+						} else {
+							throw new Error('cant move root');
+						}
+						
+					}
+				};
+
+			this.contains(callback, this.traverseBF);
+
+			let children = parent.children;
+
+			if (children.length <= 1) {
+				return null;
+			}
+			else if (children[children.length - 1] === currentNode) {
+				return null;
+			}
+
+			for (var x = 0; x < children.length-1; x++) {
+
+				if (children[x] === currentNode) {
+					let y = x + 1;
+					let tempNode = children[x];
+					children[x] = children[y];
+					children[y] = tempNode;
+					return ;
+				}
+			}
+		}
 		
 		var treeM = new Tree("To-Do:");
 		return treeM;
@@ -227,10 +308,20 @@
 		$scope.addTaskTo = function(id, task) {
 			$scope.tree.add(task, id, $scope.tree.traverseBF);
 		}
+
+		$scope.moveUp = function(id) {
+			$scope.tree.moveUp(id);
+		}
+
+		$scope.moveDown = function(id) {
+			$scope.tree.moveDown(id);
+		}
 		
 		$('body').on('click', 'li', function() {
 			$('.hidden').hide();
+			$('.active-submit').removeClass('active-submit');
 			$(this).children('.hidden').show();
+			$(this).children('.hidden').children('button').addClass('active-submit');
 		});
 	}]);
 })()
@@ -239,5 +330,19 @@
 $('body').click(function(event) {
 	if (!event.target.classList.contains('input-task')) {
 		$('.hidden').hide();
+		$('.active-submit').removeClass('active-submit');
+		$('.header-button').addClass('active-submit');
 	}
-})
+});
+
+window.addEventListener("keyup", function (event) {
+	if (event.defaultPrevented) {
+	  return; // Do nothing if the event was already processed
+	}
+
+
+	if(event.key == "Enter") {
+		document.querySelector('.active-submit').click();
+	}
+
+}, true);
