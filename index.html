@@ -28,9 +28,10 @@
 								<button class="input-task" ng-click="addTaskTo(data.id, data.newTask)">submit</button>
 							</span>
 							<section class="move-up-down">
-
+								<i class="fa fa-arrow-left" aria-hidden='true' ng-click="moveUpLevel(data.id)"></i>
 								<i class="fa fa-arrow-up" aria-hidden='true' ng-click="moveUp(data.id)"></i>
 								<i class="fa fa-arrow-down" aria-hidden='true' ng-click="moveDown(data.id)"></i>
+								
 
 							</section>
 							<!-- 

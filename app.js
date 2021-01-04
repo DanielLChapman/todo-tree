@@ -212,6 +212,39 @@
 			return childToRemove;
 		};
 
+		Tree.prototype.moveUpLevel = function(data) {
+			var tree = this,
+				currentNode = null,
+				parent = null,
+				callback = function(node) {
+					if (node.id == data) {
+						if (node.parent) {
+							currentNode = node;
+							parent = node.parent;
+						} else {
+							throw new Error('cant move root');
+						}
+						
+					}
+				};
+				
+			this.contains(callback, this.traverseBF);
+
+			if (parent && parent.id === 1) {
+				throw new Error ('cant move up to root level');
+			}
+
+			else {
+				let tempParent = parent.parent;
+				//2. Add current node to tempParent after 
+				tempParent.children.push(currentNode);
+				currentNode.parent = tempParent;
+				this.checkParents(currentNode);
+				//3. Remove current node from parent's children
+				this.remove(currentNode.id, parent.id);
+			}
+		}
+
 		Tree.prototype.moveUp = function(data) {
 			var tree = this,
 				currentNode = null,
@@ -315,6 +348,10 @@
 
 		$scope.moveDown = function(id) {
 			$scope.tree.moveDown(id);
+		}
+
+		$scope.moveUpLevel = function(id) {
+			$scope.tree.moveUpLevel(id);
 		}
 		
 		$('body').on('click', 'li', function() {
