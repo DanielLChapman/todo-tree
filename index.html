@@ -45,7 +45,9 @@
 			<header>
 				<h2>todos </h2>
 			</header>
-			<h3 class="input-field"><input ng-model="newtask" type="text" name="fname" class="new-task-field"> <button type="button" ng-click="addTaskTo(1, newtask);" class="header-button active-submit">Add Task</button> </h3>
+			<h3 class="input-field"><input ng-model="newtask" type="text" name="fname" class="new-task-field"> 
+				<button type="button" ng-click="addTaskTo(1, newtask);" class="header-button active-submit">Add Task</button> 
+				<button type="button" ng-click="clear()" class="header-button">Clear All Tasks</button> </h3>
 
 			<section class="tree-box">
 

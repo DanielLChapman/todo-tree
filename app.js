@@ -1,3 +1,5 @@
+
+
 (function() {
 	
 	var app = angular.module('todoTree', ['ui.router']);
@@ -84,6 +86,11 @@
 		Tree.prototype.contains = function(callback, traversal) {
 			traversal.call(this, callback);
 		};
+
+		Tree.prototype.clear = function() {
+			var tree = this;
+			tree['_root'].children = [];
+		}
 		//Adding a node. Traverse through the information with the callback that compares id. When we have a parent whose id is the target, we push them a child.
 		Tree.prototype.add = function(data, toData, traversal) {
 			var child = new Node(data),
@@ -339,6 +346,7 @@
 	}])
 
 	app.controller('MainCtrl', [ '$scope', 'tree', function($scope, tree){
+
 		$scope.test = function(data) {
 			console.log(data);
 		}
@@ -369,6 +377,10 @@
 		}
 		$scope.reveal = function(id) {
 			$scope.tree.reveal(id);
+		}
+
+		$scope.clear = function() {
+			$scope.tree.clear();
 		}
 		
 		$('body').on('click', 'li', function() {

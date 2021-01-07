@@ -1,5 +1,5 @@
 .tree-box {
-	width: 700px;
+	width: 650px;
 	margin: 0 auto;
 	overflow-x: auto;
 	overflow-y: auto;
@@ -44,25 +44,26 @@ h3 {
 	font-family: 'Open Sans', sans-serif;
 }
 .input-field {
-	width: 600px;
+	width: 650px;
 	margin: 0 auto;
 }
 
 .input-field input {
-	width: 400px;
+	width: 350px;
 	height: 30px;
 	font-family: 'Open Sans', sans-serif;
 	border-radius: 5px;
 	border:1px solid black;
 }
 .input-field button {
-	width: 150px;
+	width: 120px;
 	height: 34px;
 	border:1px solid black;
 	background: white;
 	position: relative;	
-	left: 30px;	
+	left: 10px;	
 	border-radius: 5px;
+	vertical-align: top;
 }
 .tree-box::-webkit-scrollbar-track
 {
@@ -111,6 +112,7 @@ h3 {
 .move-up-down i {
 	cursor: pointer;
 }
+
 
 .hide-children ~ ul {
 	display: none;
