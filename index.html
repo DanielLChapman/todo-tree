@@ -21,13 +21,21 @@
 					<ul>
 						<li ng-class="{'color-black': data.complete === false, 'color-green': data.complete === true, 'hide-children': data.hide === true}" class="input-task">
 							<i class='fa fa-check checkmark' style='cursor: pointer;' aria-hidden='true' ng-click="complete(data.id);"></i> 
-							{{data.task}} 
+							<span ng-class="{'hide-task': data.editData === true}" ng-click="setDataEditable(data.id)">{{data.task}} </span>
+							<span ng-class="{'hide-task': data.editData === false}" class="edit-option">
+								<input class="input-task" type="text" name="editTask" ng-model="data.editTask" ng-minlength="1">  
+								<button class="input-task" ng-click="editTask(data.id, data.editTask)">submit</button>
+								
+							</span>
+
 							<span class="hidden">
 								<i class='fa fa-times removal' aria-hidden='true' style='color: red !important; cursor: pointer;' ng-click="removeFrom(data.id, data.parent.id)"></i> 
 								<input class="input-task" type="text" name="newTask" ng-model="data.newTask" ng-minlength="1"> 
 								<button class="input-task" ng-click="addTaskTo(data.id, data.newTask)">submit</button>
 							</span>
+
 							<section class="move-up-down">
+								
 								<i class="fa fa-arrow-left" aria-hidden='true' ng-click="moveUpLevel(data.id)"></i>
 								<i class="fa fa-arrow-up" aria-hidden='true' ng-click="moveUp(data.id)"></i>
 								<i class="fa fa-arrow-down" aria-hidden='true' ng-click="moveDown(data.id)"></i>

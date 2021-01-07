@@ -28,8 +28,11 @@
 			this.parent = 0;
 			this.children = [];
 			this.complete = false;
-			this.newTask = ""
+			this.newTask = "";
+			this.editTask = "";
 			this.boolRemoved = true;
+
+			this.editData = false;
 			this.hide = false;
 		}
 		var Tree = function(data) {
@@ -302,6 +305,37 @@
 				currentNode.hide = !currentNode.hide;
 		}
 
+		Tree.prototype.setDataEditable = function(id) {
+			var tree = this,
+			currentNode = null,
+			callback = function(node) {
+				if (node.id === id) {
+					currentNode = node;
+				}
+			}
+
+			this.contains(callback, this.traverseBF);
+
+			currentNode.editData = true;
+			currentNode.editTask = currentNode.task;
+		}
+
+		Tree.prototype.editTask = function(id, data) {
+			var tree = this,
+			currentNode = null,
+			callback = function(node) {
+				if (node.id === id) {
+					currentNode = node;
+				}
+			}
+
+			this.contains(callback, this.traverseBF);
+
+			currentNode.task = data;
+			currentNode.editData = false;
+			currentNode.editTask = currentNode.task;
+		}
+
 		Tree.prototype.moveDown = function(data) {
 			var tree = this,
 				currentNode = null,
@@ -382,8 +416,16 @@
 		$scope.clear = function() {
 			$scope.tree.clear();
 		}
+
+		$scope.setDataEditable = function(id) {
+			$scope.tree.setDataEditable(id);
+		}
+
+		$scope.editTask = function(id, task) {
+			$scope.tree.editTask(id, task);
+		}
 		
-		$('body').on('click', 'li', function() {
+		$('body').on('click', 'li', function(event) {
 			$('.hidden').hide();
 			$('.active-submit').removeClass('active-submit');
 			$(this).children('.hidden').show();

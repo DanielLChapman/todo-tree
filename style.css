@@ -117,3 +117,7 @@ h3 {
 .hide-children ~ ul {
 	display: none;
 }
+
+.hide-task {
+	display: none;
+}
