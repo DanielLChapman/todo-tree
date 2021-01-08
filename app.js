@@ -450,7 +450,11 @@ window.addEventListener("keyup", function (event) {
 
 
 	if(event.key == "Enter") {
-		document.querySelector('.active-submit').click();
+		let dummyEl = document.getElementById('dummy-input-test');
+		var isFocused = (document.activeElement === dummyEl);
+		if (!isFocused) {
+			document.querySelector('.active-submit').click();
+		}
 	}
 
 }, true);

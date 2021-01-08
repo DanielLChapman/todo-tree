@@ -91,12 +91,15 @@ h3 {
 		left: 0;
 	}
 	.input-field input {
-		width: 70%;
+		width: 100%;
+		margin-bottom: 5px;
 		float: left;
+		padding: 0;
 	}
 	.input-field button {
 		float: left;
-		width: 25%;
+		width: 100%;
+		margin-bottom: 5px;
 		left: initial;
 	}
 	li {
