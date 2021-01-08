@@ -450,7 +450,7 @@ window.addEventListener("keyup", function (event) {
 
 
 	if(event.key == "Enter") {
-		let dummyEl = document.getElementById('dummy-input-test');
+		let dummyEl = document.querySelector('.active-submit');
 		var isFocused = (document.activeElement === dummyEl);
 		if (!isFocused) {
 			document.querySelector('.active-submit').click();
